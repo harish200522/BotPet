@@ -204,6 +204,7 @@
       <button onclick="triggerWag(this)">🐕 Happy Tail Wag</button>
       <button onclick="triggerShake(this)">💫 Full Body Shake</button>
       <button onclick="triggerSwipe(this)">🐾 Swipe / Swat</button>
+      <button onclick="triggerBlink(this)">😉 Blink Eyes</button>
       <button onclick="toggleFacing(this)">↔️ Flip Facing</button>
     </div>
 
@@ -267,6 +268,13 @@
       if (window.CharacterManager) {
         CharacterManager.shake();
         showBubble("Shake, shake! Fluffy ears flying everywhere. 🐶✨");
+      }
+    }
+
+    function triggerBlink(btn) {
+      if (window.PuppyRig && window.PuppyRig.blink) {
+        window.PuppyRig.blink(0.35);
+        showBubble("Blink! Sparkling puppy eyes! ✨🐶");
       }
     }
 
