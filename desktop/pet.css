@@ -1,0 +1,151 @@
+/* ------------------------------------------------------------------
+   pet.css — the transparent overlay strip
+   ------------------------------------------------------------------
+   The window is the full width of the work area and 260px tall, glued
+   to the bottom of the screen. Everything here must stay transparent:
+   any painted background would become a grey band across the desktop.
+------------------------------------------------------------------ */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* The cat's own box. GSAP drives translateX on this. */
+/* One design unit renders at 1.25px. pet.js mirrors this as PX_PER_UNIT
+   so the walk speed and the hit box stay in step with the drawing. */
+#pet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 188px;
+  will-change: transform;
+  transform-origin: 50% 100%;
+}
+
+#petScene {
+  position: absolute;
+  inset: 0;
+  width: 250px;
+  height: 188px;
+  overflow: visible;
+}
+
+/* ---------- speech bubble ---------- */
+.bubble {
+  position: absolute;
+  left: 50%;
+  bottom: 188px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  z-index: 100;
+  pointer-events: none;
+
+  padding: 9px 14px;
+  border-radius: 14px;
+  background: #12161f;
+  border: 1px solid #2a3244;
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .8);
+
+  color: #e8eaf0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.bubble::after {                 /* the little tail pointing at the cat */
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  background: #12161f;
+  border-right: 1px solid #2a3244;
+  border-bottom: 1px solid #2a3244;
+  transform: rotate(45deg);
+}
+
+.bubble[hidden] { display: none; }
+
+.count {
+  font-family: "Cascadia Mono", ui-monospace, monospace;
+  font-size: 12px;
+  color: #ff8f85;
+  background: rgba(226, 88, 79, .12);
+  border-radius: 7px;
+  padding: 2px 7px;
+}
+
+.bubble.is-done .count { color: #8ee0a8; background: rgba(142, 224, 168, .12); }
+.bubble.is-hint .count { color: #9aa6bd; background: rgba(154, 166, 189, .12); }
+
+/* ---------- sprite-based companion skins ---------- */
+#petSprite {
+  position: absolute;
+  left: 25px;
+  top: 10px;
+  width: 200px;
+  height: 165px;
+  object-fit: contain;
+  transform-origin: 50% 100%;
+  display: none;            /* hidden until a non-cat skin is active */
+  pointer-events: none;
+  image-rendering: auto;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Cat rig hidden when a sprite skin is active */
+#pet.skin-sprite #petScene { display: none; }
+#pet.skin-sprite #petSprite { display: block; }
+
+/* Walking — gentle left-right sway (penguin/panda waddle) */
+@keyframes sprite-walk {
+  0%   { transform: rotate(-3deg) translateY(0); }
+  25%  { transform: rotate( 2deg) translateY(-3px); }
+  50%  { transform: rotate(-3deg) translateY(0); }
+  75%  { transform: rotate( 2deg) translateY(-3px); }
+  100% { transform: rotate(-3deg) translateY(0); }
+}
+
+/* Sleeping — slow breathing loaf */
+@keyframes sprite-sleep {
+  0%, 100% { transform: scaleY(1.00) translateY(0); }
+  50%       { transform: scaleY(0.94) translateY(4px); }
+}
+
+/* Dangling — loose mid-air bobble */
+@keyframes sprite-dangle {
+  0%, 100% { transform: rotate(-6deg) translateY(-2px); }
+  50%       { transform: rotate( 6deg) translateY( 2px); }
+}
+
+/* Happy / pat — gentle bounce */
+@keyframes sprite-happy {
+  0%, 100% { transform: translateY(0) scale(1); }
+  30%       { transform: translateY(-8px) scale(1.06); }
+  60%       { transform: translateY(-2px) scale(0.97); }
+}
+
+/* State animation classes applied by pet.js */
+#pet.skin-sprite.state-walk   #petSprite { animation: sprite-walk   0.55s ease-in-out infinite; }
+#pet.skin-sprite.state-sleep  #petSprite { animation: sprite-sleep   2.4s  ease-in-out infinite; }
+#pet.skin-sprite.state-dangle #petSprite { animation: sprite-dangle  0.45s ease-in-out infinite; }
+#pet.skin-sprite.state-happy  #petSprite { animation: sprite-happy   0.6s  ease-in-out 3; }
+

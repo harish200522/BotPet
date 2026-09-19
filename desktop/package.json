@@ -1,0 +1,15 @@
+{
+  "name": "botpet-desktop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BotPet — Your playful AI desktop companion that helps you stay focused.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pet": "electron launch_widget.js",
+    "dev": "electron . --dev"
+  },
+  "devDependencies": {
+    "electron": "^44.1.0"
+  }
+}

@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BotPet Desktop Companion</title>
+<link rel="stylesheet" href="../css/cat.css" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    background: transparent;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pet-card {
+    width: 320px;
+    background: rgba(18, 22, 31, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255, 255, 255, 0.14);
+    border-radius: 22px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(0, 0, 0, 0.5);
+    padding: 10px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Free Pet Mode: transparent floating cat on desktop */
+  .pet-card.free-pet-mode {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .pet-card.free-pet-mode .title-text {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .pet-card.free-pet-mode:hover .title-text {
+    opacity: 1;
+  }
+
+  .pet-card.free-pet-mode .controls {
+    opacity: 0.2;
+    transition: opacity 0.25s ease;
+  }
+  .pet-card.free-pet-mode:hover .controls {
+    opacity: 1;
+  }
+
+  .title-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 4px;
+    cursor: grab;
+    -webkit-app-region: drag;
+  }
+  .title-bar:active { cursor: grabbing; }
+
+  .title-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .title-text {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9aa6bd;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 3px 8px;
+    border-radius: 10px;
+  }
+
+  .title-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #5fd97a;
+    box-shadow: 0 0 8px #5fd97a;
+    animation: pulseDot 2s infinite ease-in-out;
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.25); opacity: 0.7; }
+  }
+
+  .title-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    -webkit-app-region: no-drag;
+  }
+
+  .action-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #9aa6bd;
+    font-size: 11px;
+    padding: 3px 7px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+  }
+  .action-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+
+  .close-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    color: #9aa6bd;
+    font-size: 11px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    -webkit-app-region: no-drag;
+  }
+  .close-btn:hover { background: #e2584f; color: #fff; }
+
+  .cat-stage {
+    width: 230px;
+    height: 155px;
+    position: relative;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #petScene {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.5));
+  }
+
+  .bubble {
+    position: absolute;
+    left: 50%;
+    top: -16px;
+    z-index: 100;
+    transform: translateX(-50%);
+    background: #242c3d;
+    border: 1px solid #3d4a63;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 11.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 10;
+  }
+  .bubble::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    transform: translateX(-50%) rotate(45deg);
+    width: 8px;
+    height: 8px;
+    background: #242c3d;
+    border-right: 1px solid #3d4a63;
+    border-bottom: 1px solid #3d4a63;
+  }
+  .bubble.hidden { opacity: 0; transform: translateX(-50%) translateY(6px); }
+
+  .controls {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    margin-top: 6px;
+    -webkit-app-region: no-drag;
+  }
+
+  .btn {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    color: #d1d7e3;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 9px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+  .btn.active {
+    background: #5fd97a;
+    color: #12161f;
+    border-color: #5fd97a;
+    font-weight: 700;
+  }
+  .btn-swipe {
+    background: rgba(226, 88, 79, 0.2);
+    border-color: rgba(226, 88, 79, 0.4);
+    color: #ff9b94;
+    font-weight: 600;
+  }
+  .btn-swipe:hover {
+    background: #e2584f;
+    color: #fff;
+    border-color: #e2584f;
+  }
+</style>
+</head>
+<body>
+  <div class="pet-card" id="petCard">
+    <div class="title-bar">
+      <div class="title-left">
+        <div class="title-text">
+          <span class="title-dot"></span>
+          BotPet Companion
+        </div>
+      </div>
+      <div class="title-actions">
+        <button class="action-btn" id="modeBtn" title="Toggle Transparent Screen Pet Mode">🐾 Free Pet</button>
+        <button class="close-btn" id="closeBtn" title="Close">✕</button>
+      </div>
+    </div>
+
+    <div class="cat-stage" id="catStage" title="Click to Pat your Pet!">
+      <div class="bubble hidden" id="bubble">Purr... ❤️</div>
+      <svg id="petScene" viewBox="0 0 200 150" aria-hidden="true"></svg>
+    </div>
+
+    <div class="controls" id="btnGroup">
+      <button class="btn active" data-state="sit">Rest</button>
+      <button class="btn" data-state="walk">Stroll</button>
+      <button class="btn" data-state="pat">Cheer</button>
+      <button class="btn" data-state="sleep">Snooze</button>
+      <button class="btn" data-state="angry">Alert</button>
+      <button class="btn" data-state="bored">Relaxed</button>
+      <button class="btn btn-swipe" data-action="swipe">🐾 Paw Strike</button>
+    </div>
+  </div>
+
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/MorphSVGPlugin.min.js"></script>
+  <script src="../js/cat-rig.js"></script>
+  <script src="../js/cat-shapes.js"></script>
+  <script src="../js/cat.js"></script>
+  <script src="../js/character-manager.js"></script>
+  <script src="../js/panda-rig.js"></script>
+  <script src="widget.js"></script>
+</body>
+</html>

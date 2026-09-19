@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BotPet — The Playful Desktop Focus Companion</title>
+<meta name="description" content="BotPet lives along the bottom of your screen. When Shorts, Reels or distracting sites hold the foreground too long, it walks over and taps the window closed. Clean, local and playful for Windows." />
+
+<meta property="og:title" content="BotPet" />
+<meta property="og:description" content="Your playful desktop companion that closes doomscroll distractions. Free and local for Windows." />
+<meta property="og:type" content="website" />
+
+<link rel="icon" href="favicon.ico" />
+<link rel="stylesheet" href="lib/cat.css" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#top">
+    <img class="brandmark" src="icon.png" alt="" width="26" height="26" />
+    <span>BotPet</span>
+  </a>
+  <nav>
+    <a href="#how">How it works</a>
+    <a href="#inside">Inside the app</a>
+    <a href="#levels">Levels</a>
+    <a href="#faq">FAQ</a>
+    <a class="solid" href="#download">Download</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ---------------- hero ---------------- -->
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Interactive · Local · Windows 10 &amp; 11</p>
+      <h1>Your companion has opinions<br />about your screen time.</h1>
+      <p class="lede">
+        BotPet sits along the bottom of your screen. When Shorts, Reels, TikTok or a
+        streaming site holds the foreground for too long, it gets up, walks over, and
+        taps the window closed with one playful swat.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="#download">Download for Windows</a>
+        <a class="btn" href="#how">Learn more</a>
+      </div>
+      <p class="fineprint" id="heroVersion">Version 1.0.0 — Windows 10 &amp; 11</p>
+    </div>
+
+    <!-- the live rig: the real character, not a screenshot -->
+    <div class="stage">
+      <div class="desk">
+        <svg class="scene" viewBox="0 0 300 170" aria-label="An animated companion on a desk">
+          <g id="sceneCat"></g>
+        </svg>
+        <div class="floorline"></div>
+      </div>
+      <div class="poserow" id="poseRow">
+        <button data-state="sit" class="on">Sit</button>
+        <button data-state="walk">Walk</button>
+        <button data-state="sleep">Sleep</button>
+        <button data-state="pat">Pat</button>
+        <button data-state="angry">Angry</button>
+        <button data-state="bored">Bored</button>
+        <button data-act="swipe">Swipe</button>
+        <button data-act="levelup">Level&nbsp;up</button>
+      </div>
+      <p class="stagehint">Interactive vector companion powered by live SVG animation.</p>
+    </div>
+  </section>
+
+  <!-- ---------------- trust strip ---------------- -->
+  <section class="strip">
+    <div><b>No account</b><span>nothing to sign up for</span></div>
+    <div><b>No telemetry</b><span>nothing leaves your machine</span></div>
+    <div><b>No admin rights</b><span>runs directly on your system</span></div>
+    <div><b>3 Characters</b><span>Cat, Panda &amp; Puppy</span></div>
+  </section>
+
+  <!-- ---------------- how ---------------- -->
+  <section id="how" class="band">
+    <p class="kicker">How it works</p>
+    <h2>Three things, on a loop.</h2>
+    <div class="cards">
+      <article>
+        <span class="num">01</span>
+        <h3>It watches the foreground</h3>
+        <p>
+          Every second it checks the window in front of you — the URL, title, and process.
+          Everything stays local on your machine.
+        </p>
+      </article>
+      <article>
+        <span class="num">02</span>
+        <h3>It respects your grace period</h3>
+        <p>
+          A quick glance at a video is fine. But when the timer expires, your companion gets
+          up and marches over.
+        </p>
+      </article>
+      <article>
+        <span class="num">03</span>
+        <h3>It closes the distraction</h3>
+        <p>
+          A browser tab gets closed via shortcut. You get your focus back, and your companion
+          earns XP and returns to rest.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ---------------- levels ---------------- -->
+  <section id="levels" class="band">
+    <div class="split">
+      <div>
+        <p class="kicker">Affection &amp; Levels</p>
+        <h2>It remembers your focus milestones.</h2>
+        <p class="lede small">
+          Every distraction closed earns XP, and so does patting your companion.
+          Progress is tracked cleanly across your focus journey.
+        </p>
+        <ul class="ticks">
+          <li><b>25 XP</b> per window or tab closed</li>
+          <li><b>5 XP</b> for each pat and interaction</li>
+          <li>Settings and rules are fully customizable</li>
+        </ul>
+        <p class="fineprint">
+          Try it: hit <b>Level&nbsp;up</b> on the companion stage above.
+        </p>
+      </div>
+      <div class="levelcard">
+        <div class="lvlhead"><span>Lv. <b>3</b></span><i>70 / 80 XP</i></div>
+        <div class="lvlbar"><i style="width:87%"></i></div>
+        <div class="lvlstats">
+          <div><b>7</b><span>closed</span></div>
+          <div><b>2</b><span>pats</span></div>
+          <div><b>185</b><span>total XP</span></div>
+        </div>
+        <p class="lvlnote">Affection meter sits in the settings sidebar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------------- download ---------------- -->
+  <section id="download" class="band alt">
+    <p class="kicker center">Get it</p>
+    <h2 class="center">Download BotPet</h2>
+    <p class="lede small center">
+      Windows 10 and 11. Lightweight desktop app that keeps your focus sharp and your screen joyful.
+    </p>
+
+    <div class="dl">
+      <a class="btn primary big" id="dlPrimary" href="#">
+        Launch Desktop Companion
+      </a>
+    </div>
+    <p class="fineprint center" id="dlMeta">BotPet v1.0.0 — Standalone Desktop Edition</p>
+  </section>
+
+  <!-- ---------------- faq ---------------- -->
+  <section id="faq" class="band">
+    <p class="kicker">Questions</p>
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <details>
+        <summary>Does it send data anywhere?</summary>
+        <p>
+          No. There is no telemetry, no tracking, and no external servers. Everything runs
+          locally on your own machine.
+        </p>
+      </details>
+      <details>
+        <summary>Which animals are supported?</summary>
+        <p>
+          BotPet includes <b>Classic Cat</b>, <b>Chibi Panda</b>, and <b>Playful Puppy</b>.
+        </p>
+      </details>
+      <details>
+        <summary>Can I customize what gets closed?</summary>
+        <p>
+          Yes. You have full control over detection rules, grace periods, snooze durations,
+          and a "Never touch" whitelist.
+        </p>
+      </details>
+      <details>
+        <summary>Can I just have the pet without automatic closing?</summary>
+        <p>
+          Yes! Simply toggle the mode to "Only complain" or turn "On patrol" off to enjoy a cute
+          interactive companion.
+        </p>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>BotPet — The Playful Desktop Focus Companion</p>
+</footer>
+
+<script src="lib/gsap.min.js"></script>
+<script src="lib/MorphSVGPlugin.min.js"></script>
+<script src="lib/cat-rig.js"></script>
+<script src="lib/cat-shapes.js"></script>
+<script src="lib/cat.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

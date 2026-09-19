@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panda Companion - Grounded Seated & Action Preview</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px;
+      min-height: 100vh;
+      background: radial-gradient(circle at 50% 20%, #1f2430 0%, #0d1117 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      width: 100%;
+      max-width: 640px;
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    p.subtitle {
+      margin: 0 0 20px;
+      font-size: 14px;
+      color: #94a3b8;
+    }
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 280px;
+      background: linear-gradient(180deg, #181c24 0%, #10131a 80%, #0c0e14 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .shelf-line {
+      position: absolute;
+      bottom: 22px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 2px;
+    }
+    svg#cat-svg {
+      width: 220px;
+      height: 220px;
+      overflow: visible;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+    }
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    button {
+      background: #334155;
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    button:hover {
+      background: #475569;
+      transform: translateY(-1px);
+    }
+    button:active {
+      transform: translateY(1px);
+    }
+    button.active {
+      background: #f43f5e;
+      border-color: #fb7185;
+      color: #fff;
+      box-shadow: 0 0 12px rgba(244, 63, 94, 0.4);
+    }
+    .controls {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+    .controls input[type="range"] {
+      accent-color: #f43f5e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🐼 Panda Companion Grounded Seated Pose</h1>
+    <p class="subtitle">Zero Bottom Gap • Continuous White Belly • Pink Pads & Toe Beans • Complete Action Rig</p>
+
+    <div class="stage">
+      <div class="shelf-line"></div>
+      <svg id="cat-svg" viewBox="0 0 200 150">
+        <g id="character-root"></g>
+      </svg>
+    </div>
+
+    <div class="btn-grid">
+      <button class="active" onclick="switchState('sit', this)">Sit (Grounded)</button>
+      <button onclick="switchState('walk', this)">Walk (Waddle)</button>
+      <button onclick="switchState('pat', this)">Pat (Cheer)</button>
+      <button onclick="switchState('sleep', this)">Sleep (Zzz)</button>
+      <button onclick="switchState('angry', this)">Angry (Stomp)</button>
+      <button onclick="switchState('confront', this)">Confront (Paw)</button>
+      <button onclick="switchState('bored', this)">Bored (Slouch)</button>
+      <button onclick="triggerSwipe(this)">Swipe (Swat)</button>
+    </div>
+
+    <div class="controls">
+      <label>Speed: <input type="range" id="speedSlider" min="0.5" max="2.0" step="0.1" value="1.0" oninput="changeSpeed(this.value)" /> <span id="speedVal">1.0x</span></label>
+      <button onclick="toggleFacing()" style="padding:6px 12px;">Flip Facing</button>
+    </div>
+  </div>
+
+  <script src="../js/panda-rig.js"></script>
+  <script>
+    let facing = 1;
+    const root = document.getElementById("character-root");
+    window.PandaRig.mount(root);
+    window.PandaRig.init({ state: "sit", speed: 1.0 });
+
+    function switchState(name, btn) {
+      document.querySelectorAll('.btn-grid button').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      window.PandaRig.setState(name);
+    }
+
+    function triggerSwipe(btn) {
+      document.querySelectorAll('.btn-grid button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      window.PandaRig.swipe(() => {
+        console.log("Panda paw strike impact!");
+      }).then(() => {
+        const sitBtn = document.querySelector('.btn-grid button:first-child');
+        if (sitBtn) sitBtn.classList.add('active');
+        btn.classList.remove('active');
+      });
+    }
+
+    function changeSpeed(val) {
+      document.getElementById("speedVal").textContent = val + "x";
+      window.PandaRig.setSpeed(parseFloat(val));
+    }
+
+    function toggleFacing() {
+      facing = -facing;
+      window.PandaRig.setFacing(facing);
+    }
+  </script>
+</body>
+</html>

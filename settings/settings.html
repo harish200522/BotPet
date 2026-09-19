@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BotPet — Focus &amp; Companion Settings</title>
+<link rel="stylesheet" href="../css/cat.css" />
+<link rel="stylesheet" href="settings.css" />
+</head>
+<body>
+
+<!-- Vertical 1px Edge Lines (Auden FX Requirement) -->
+<div class="viewport-edge-left" aria-hidden="true"></div>
+<div class="viewport-edge-right" aria-hidden="true"></div>
+
+<!-- Background 48px Grid Texture Overlay & Ambient Radial Glows -->
+<div class="grid-bg-overlay" aria-hidden="true"></div>
+<div class="ambient-glow-circle glow-top-right" aria-hidden="true"></div>
+<div class="ambient-glow-circle glow-bottom-left" aria-hidden="true"></div>
+
+<div class="app-shell">
+
+  <!-- Top Sticky Navigation & System Bar (Auden FX Requirement) -->
+  <header class="sys-topbar">
+    <div class="sys-top-left">
+      <div class="sys-logo">
+        BOTPET <span class="logo-fx">// CORE</span>
+      </div>
+      <div class="sys-status-badge">
+        <span class="status-dot"></span>
+        <span id="sysStatusText">SYS.ACTIVE // VIGILANCE</span>
+      </div>
+    </div>
+    <div class="sys-top-right">
+      <div class="iso-clock font-mono-custom">
+        <span id="liveIsoClock">2026-09-17T00:00:00.000Z</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <div class="main-layout">
+
+    <!-- Left Sidebar Navigation -->
+    <aside class="sidebar">
+
+      <div class="sidebar-brand-card hover-red-line">
+        <div class="corner-bracket bracket-tl"></div>
+        <div class="corner-bracket bracket-tr"></div>
+        <div class="corner-bracket bracket-bl"></div>
+        <div class="corner-bracket bracket-br"></div>
+
+        <svg viewBox="0 0 200 150" class="brand-avatar-box" aria-hidden="true"><g id="brandMount"></g></svg>
+        <div class="brand-title-group">
+          <h2>BotPet Studio</h2>
+          <p id="brandState">Guarding Screen</p>
+        </div>
+      </div>
+
+      <!-- Rank & Milestone Matrix -->
+      <div class="rank-matrix-card hover-red-line">
+        <div class="rank-header">
+          <span class="rank-badge">Rank <b id="lvlNum">1</b></span>
+          <span class="rank-xp-num" id="lvlXp">0 / 50 XP</span>
+        </div>
+        <div class="rank-bar-track"><div class="rank-bar-fill" id="xpFill" style="width:0%"></div></div>
+        <p class="rank-note" id="lvlNote">50 Focus XP to Rank 2</p>
+      </div>
+
+      <!-- Indexed Navigation Buttons -->
+      <button class="nav-btn is-active" data-panel="patrol" aria-current="true">
+        <span class="nav-index">[ 01 ]</span>
+        <span>Focus Guard</span>
+      </button>
+      <button class="nav-btn" data-panel="rules">
+        <span class="nav-index">[ 02 ]</span>
+        <span>Distraction Filters</span>
+      </button>
+      <button class="nav-btn" data-panel="never">
+        <span class="nav-index">[ 03 ]</span>
+        <span>Exclusion Whitelist</span>
+      </button>
+      <button class="nav-btn" data-panel="pet">
+        <span class="nav-index">[ 04 ]</span>
+        <span>Companion Studio</span>
+      </button>
+      <button class="nav-btn" data-panel="live">
+        <span class="nav-index">[ 05 ]</span>
+        <span>Real-Time Telemetry</span>
+      </button>
+      <button class="nav-btn" data-panel="about">
+        <span class="nav-index">[ 06 ]</span>
+        <span>System Specs</span>
+      </button>
+
+      <div class="sidebar-foot">
+        <span class="save-indicator font-mono-custom" id="savedPill" hidden>● SAVED &amp; SYNCED</span>
+      </div>
+    </aside>
+
+    <!-- Main Content Panels Viewport -->
+    <main class="panels-viewport">
+
+      <!-- ==================== Panel 01: Focus Guard ==================== -->
+      <section class="panel-section is-on" data-panel="patrol">
+        <div class="section-sys-header">
+          <div class="sys-label-tag">[ 01 // FOCUS GUARD &amp; ACTIVE VIGILANCE ]</div>
+          <h1 class="section-title">Active Screen Vigilance</h1>
+          <p class="section-desc">Configure automated background telemetry, foreground inspection cadence, and distraction enforcement policies.</p>
+        </div>
+
+        <div class="poster-shell hover-red-line">
+          <div class="corner-bracket bracket-tl"></div>
+          <div class="corner-bracket bracket-tr"></div>
+          <div class="corner-bracket bracket-bl"></div>
+          <div class="corner-bracket bracket-br"></div>
+          <div class="poster-inner">
+            <label class="setting-row">
+              <span class="custom-switch">
+                <input type="checkbox" id="enabled" />
+                <span class="switch-slider"></span>
+              </span>
+              <div class="setting-text-group">
+                <span class="setting-label">Enable Screen Guardian</span>
+                <span class="setting-subtext">Maintain continuous background process monitoring without terminating the desktop companion.</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="poster-shell hover-red-line">
+          <div class="poster-inner">
+            <div class="card-title-mono">Intervention Policy &amp; Action Mode</div>
+            <label class="custom-radio">
+              <input type="radio" name="mode" value="close" id="modeClose" />
+              <div class="setting-text-group">
+                <span class="setting-label">Auto-Dismiss Window / Active Tab</span>
+                <span class="setting-subtext">Dispatches tab close shortcut (Ctrl+W) to web browsers or performs safe process termination on target window.</span>
+              </div>
+            </label>
+            <label class="custom-radio" style="margin-top: 8px;">
+              <input type="radio" name="mode" value="nag" id="modeNag" />
+              <div class="setting-text-group">
+                <span class="setting-label">Advisory Alert (Warning Gesture Only)</span>
+                <span class="setting-subtext">Companion enters an alert stance with warning visual feedback without closing target applications. Recommended for rule tuning.</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="grid-2col">
+          <div class="poster-shell hover-red-line">
+            <div class="poster-inner input-field-group">
+              <div class="input-label-row">
+                <span>Intervention Grace Countdown</span>
+                <span class="font-mono-custom text-accent">0 – 30s</span>
+              </div>
+              <div class="input-unit-box">
+                <input type="number" id="countdown" min="0" max="30" class="input-dark" />
+                <span class="unit-suffix">SEC</span>
+              </div>
+              <p class="field-caption">Grace countdown before dismissal. Click your companion mid-countdown to grant temporary pause.</p>
+            </div>
+          </div>
+
+          <div class="poster-shell hover-red-line">
+            <div class="poster-inner input-field-group">
+              <div class="input-label-row">
+                <span>Pause Duration</span>
+                <span class="font-mono-custom text-accent">1 – 240m</span>
+              </div>
+              <div class="input-unit-box">
+                <input type="number" id="snoozeMinutes" min="1" max="240" class="input-dark" />
+                <span class="unit-suffix">MIN</span>
+              </div>
+              <p class="field-caption">Temporary focus relief granted when requested via tray menu or companion mid-countdown clicks.</p>
+            </div>
+          </div>
+
+          <div class="poster-shell hover-red-line">
+            <div class="poster-inner input-field-group">
+              <div class="input-label-row">
+                <span>Foreground Polling Rate</span>
+                <span class="font-mono-custom text-accent">250 – 10000ms</span>
+              </div>
+              <div class="input-unit-box">
+                <input type="number" id="pollMs" min="250" max="10000" step="250" class="input-dark" />
+                <span class="unit-suffix">MS</span>
+              </div>
+              <p class="field-caption">Polling cycle for active foreground window handle change detection.</p>
+            </div>
+          </div>
+
+          <div class="poster-shell hover-red-line">
+            <div class="poster-inner input-field-group">
+              <div class="input-label-row">
+                <span>URL Inspection Cadence</span>
+                <span class="font-mono-custom text-accent">500 – 10000ms</span>
+              </div>
+              <div class="input-unit-box">
+                <input type="number" id="urlPollMs" min="500" max="10000" step="500" class="input-dark" />
+                <span class="unit-suffix">MS</span>
+              </div>
+              <p class="field-caption">Hardware-optimized cadence for browser UI Automation address bar extraction.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Panel 02: Distraction Filters ==================== -->
+      <section class="panel-section" data-panel="rules">
+        <div class="section-sys-header">
+          <div class="sys-label-tag">[ 02 // DISTRACTION FILTERS &amp; RULES ]</div>
+          <h1 class="section-title">Trigger Conditions &amp; Rules</h1>
+          <p class="section-desc">Active window metadata (URL paths, window headers, and executable filenames) is evaluated sequentially against your active filters from top to bottom.</p>
+        </div>
+
+        <div class="poster-shell hover-red-line" style="margin-bottom: 16px;">
+          <div class="poster-inner" style="font-size: 12px; line-height: 1.6; color: var(--text-dim);">
+            <b style="color: var(--text-bright);">Multi-Attribute Matching Architecture:</b> Web browsers expose website titles in captions, while short-form feeds (such as Shorts or Reels) are verified via URL path tokens. Fullscreen media may hide address bars, seamlessly falling back to title detection. Combining keywords and title terms ensures reliable tracking.
+          </div>
+        </div>
+
+        <div class="rules-table-container hover-red-line">
+          <div class="rules-table-head">
+            <span></span>
+            <span>Filter Title</span>
+            <span>Match Any Keywords</span>
+            <span>Require All</span>
+            <span>Grace</span>
+            <span>Enforcement</span>
+            <span></span>
+          </div>
+          <div id="ruleRows"></div>
+        </div>
+
+        <div class="button-bar" style="margin-top: 14px;">
+          <button class="btn-auden btn-primary" id="addRule">+ Create Custom Filter</button>
+          <button class="btn-auden" id="resetRules">Reset Default Presets</button>
+        </div>
+      </section>
+
+      <!-- ==================== Panel 03: Exclusion Whitelist ==================== -->
+      <section class="panel-section" data-panel="never">
+        <div class="section-sys-header">
+          <div class="sys-label-tag">[ 03 // EXCLUSION WHITELIST ]</div>
+          <h1 class="section-title">Protected Applications &amp; Whitelist</h1>
+          <p class="section-desc">Processes, web domains, and window captions matching any keyword below are strictly immune to interception, regardless of matching filters. Enter one pattern per line.</p>
+        </div>
+
+        <div class="poster-shell hover-red-line">
+          <div class="corner-bracket bracket-tl"></div>
+          <div class="corner-bracket bracket-tr"></div>
+          <div class="corner-bracket bracket-bl"></div>
+          <div class="corner-bracket bracket-br"></div>
+          <div class="poster-inner">
+            <textarea id="neverList" class="terminal-textarea" spellcheck="false"
+                      placeholder="zoom meeting&#10;microsoft teams&#10;google meet&#10;visual studio code"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Panel 04: Companion Studio ==================== -->
+      <section class="panel-section" data-panel="pet">
+        <div class="section-sys-header">
+          <div class="sys-label-tag">[ 04 // COMPANION STUDIO &amp; AVATAR RIGS ]</div>
+          <h1 class="section-title">Pet Companion Studio</h1>
+          <p class="section-desc">Customize active companion avatars, 3D WebGL stage parameters, visual themes, and motion physics.</p>
+        </div>
+
+        <!-- 3D WebGL Hero Stage (Auden FX Requirement: mix-blend-screen Three.js mesh) -->
+        <div class="poster-shell hover-red-line">
+          <div class="corner-bracket bracket-tl"></div>
+          <div class="corner-bracket bracket-tr"></div>
+          <div class="corner-bracket bracket-bl"></div>
+          <div class="corner-bracket bracket-br"></div>
+          <div class="poster-inner" style="padding: 12px;">
+            <div class="hero-stage-container">
+              <canvas id="threeWebglCanvas"></canvas>
+              <svg id="petPreviewMount" viewBox="0 0 200 150" class="avatar-mount-box" aria-hidden="true"></svg>
+            </div>
+
+            <!-- Avatar Selection Grid -->
+            <div class="card-title-mono">Select Active Companion Avatar</div>
+            <div class="skin-matrix-grid">
+              <button class="skin-card-btn is-active" data-skin="cat" id="skinCard-cat">
+                <span class="skin-indicator">✓ ACTIVE</span>
+                <span class="skin-icon">🐱</span>
+                <span class="skin-label">Classic Cat</span>
+              </button>
+              <button class="skin-card-btn" data-skin="panda" id="skinCard-panda">
+                <span class="skin-indicator">✓ ACTIVE</span>
+                <span class="skin-icon">🐼</span>
+                <span class="skin-label">Chibi Panda</span>
+              </button>
+              <button class="skin-card-btn" data-skin="puppy" id="skinCard-puppy">
+                <span class="skin-indicator">✓ ACTIVE</span>
+                <span class="skin-icon">🐶</span>
+                <span class="skin-label">Playful Puppy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile & Greet Card -->
+        <div class="poster-shell hover-red-line">
+          <div class="poster-inner">
+            <div class="input-field-group">
+              <div class="input-label-row">
+                <span>User Profile Name</span>
+                <span class="font-mono-custom text-accent">USER.NAME</span>
+              </div>
+              <input type="text" id="userName" class="input-dark" placeholder="Leave blank to use your Windows account name" spellcheck="false" />
+              <p class="field-caption">Personalizes startup greetings, milestone cheers, and focus sprint reminders.</p>
+            </div>
+            <div class="button-bar" style="margin-top: 12px;">
+              <button class="btn-auden btn-primary" id="wakeGreetBtn" type="button">Send Greeting &amp; Wake Avatar 🐾</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sliders Matrix -->
+        <div class="grid-2col">
+          <div class="poster-shell hover-red-line">
+            <div class="poster-inner input-field-group">
+              <div class="input-label-row">
+                <span>Avatar Scale</span>
+                <span class="font-mono-custom text-accent"><output id="catScaleOut">1.25</output> px/unit</span>
+              </div>
+              <input type="range" id="catScale" min="0.7" max="2.2" step="0.05" />
+              <p class="field-caption">Adjusts screen footprint and design box scaling across desktop displays.</p>
+            </div>
+          </div>
+
+          <div class="poster-shell hover-red-line">
+            <div class="poster-inner input-field-group">
+              <div class="input-label-row">
+                <span>Pacing &amp; Speed Multiplier</span>
+                <span class="font-mono-custom text-accent"><output id="catSpeedOut">1.00</output>×</span>
+              </div>
+              <input type="range" id="catSpeed" min="0.5" max="2" step="0.05" />
+              <p class="field-caption">Synchronizes gait cycle and screen traversal speed to prevent paw sliding.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual & Behavior Switches -->
+        <div class="poster-shell hover-red-line">
+          <div class="poster-inner">
+            <div class="card-title-mono">Visual Palette &amp; Roaming Behaviors</div>
+            <label class="setting-row">
+              <span class="custom-switch">
+                <input type="checkbox" id="catDarkFur" />
+                <span class="switch-slider"></span>
+              </span>
+              <div class="setting-text-group">
+                <span class="setting-label">Midnight Obsidian Palette</span>
+                <span class="setting-subtext">Renders companion coats in a sleek dark velvet color scheme.</span>
+              </div>
+            </label>
+            <label class="setting-row">
+              <span class="custom-switch">
+                <input type="checkbox" id="catPinkEars" />
+                <span class="switch-slider"></span>
+              </span>
+              <div class="setting-text-group">
+                <span class="setting-label">Pastel Cheek Blush &amp; Ear Accents</span>
+                <span class="setting-subtext">Displays charming rosy cheek blushes and pastel ear accents.</span>
+              </div>
+            </label>
+            <label class="setting-row">
+              <span class="custom-switch">
+                <input type="checkbox" id="catWander" />
+                <span class="switch-slider"></span>
+              </span>
+              <div class="setting-text-group">
+                <span class="setting-label">Autonomous Bottom Dock Roaming</span>
+                <span class="setting-subtext">When disabled, your companion remains pinned wherever dragged and placed.</span>
+              </div>
+            </label>
+            <label class="setting-row">
+              <span class="custom-switch">
+                <input type="checkbox" id="catSleepy" />
+                <span class="switch-slider"></span>
+              </span>
+              <div class="setting-text-group">
+                <span class="setting-label">Idle Rest &amp; Nap Cycles</span>
+                <span class="setting-subtext">Enables cozy resting and nap intervals during downtime.</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Milestones 4-Grid -->
+        <div class="poster-shell hover-red-line">
+          <div class="poster-inner">
+            <div class="card-title-mono">Focus Milestones &amp; Reputation</div>
+            <div class="stats-4grid">
+              <div class="stat-box">
+                <span class="stat-num" id="statLevel">1</span>
+                <span class="stat-tag">RANK / LEVEL</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-num" id="statClosed">0</span>
+                <span class="stat-tag">DISMISSED</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-num" id="statPats">0</span>
+                <span class="stat-tag">PATS / CHEERS</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-num" id="statXp">0</span>
+                <span class="stat-tag">FOCUS XP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Animation Triggers & Simulation -->
+        <div class="poster-shell hover-red-line">
+          <div class="poster-inner">
+            <div class="card-title-mono">Trigger Companion Animation States</div>
+            <div class="button-bar" id="poseBtns">
+              <button class="btn-auden" data-pose="walk">Stroll (Walk)</button>
+              <button class="btn-auden" data-pose="sit">Rest (Sit)</button>
+              <button class="btn-auden" data-pose="sleep">Snooze (Sleep)</button>
+              <button class="btn-auden" data-pose="pat">Celebrate (Pat)</button>
+              <button class="btn-auden" data-pose="angry">Alert (Angry)</button>
+              <button class="btn-auden" data-pose="bored">Relaxed (Bored)</button>
+              <button class="btn-auden" data-pose="confront">Defense (Stance)</button>
+              <button class="btn-auden" data-pose="swipe">Paw Strike (Swat)</button>
+            </div>
+
+            <div class="card-title-mono" style="margin-top: 18px;">Simulation &amp; Screen Diagnostics</div>
+            <div class="button-bar">
+              <button class="btn-auden btn-primary" id="previewBust">Test Intervention Flow</button>
+              <button class="btn-auden" id="toggleCat">Toggle Companion Visibility</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Panel 05: Real-Time Telemetry ==================== -->
+      <section class="panel-section" data-panel="live">
+        <div class="section-sys-header">
+          <div class="sys-label-tag">[ 05 // REAL-TIME TELEMETRY &amp; INSPECTOR ]</div>
+          <h1 class="section-title">Diagnostic Telemetry HUD</h1>
+          <p class="section-desc">Real-time telemetry stream showing active focused window handle, process name, evaluated URL token, and rule matching status.</p>
+        </div>
+
+        <div class="poster-shell hover-red-line">
+          <div class="corner-bracket bracket-tl"></div>
+          <div class="corner-bracket bracket-tr"></div>
+          <div class="corner-bracket bracket-bl"></div>
+          <div class="corner-bracket bracket-br"></div>
+          <div class="poster-inner">
+            <div class="telemetry-grid">
+              <div class="telemetry-kv-box">
+                <span class="telemetry-key">ACTIVE WINDOW CAPTION</span>
+                <span class="telemetry-val" id="liveTitle">—</span>
+              </div>
+              <div class="telemetry-kv-box">
+                <span class="telemetry-key">DETECTED URL ADDRESS</span>
+                <span class="telemetry-val" id="liveUrl">—</span>
+              </div>
+              <div class="telemetry-kv-box">
+                <span class="telemetry-key">EXECUTABLE PROCESS</span>
+                <span class="telemetry-val" id="liveProc">—</span>
+              </div>
+              <div class="telemetry-kv-box">
+                <span class="telemetry-key">TRIGGERING FILTER</span>
+                <span class="telemetry-val" id="liveRule">—</span>
+              </div>
+              <div class="telemetry-kv-box">
+                <span class="telemetry-key">ACTION COUNTDOWN</span>
+                <span class="telemetry-val" id="liveRemaining">—</span>
+              </div>
+              <div class="telemetry-kv-box">
+                <span class="telemetry-key">EVALUATED TARGET STRING</span>
+                <span class="telemetry-val" id="liveHay">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="poster-shell hover-red-line">
+          <div class="poster-inner">
+            <div class="card-title-mono">Decision Audit Trail</div>
+            <div id="liveTrail" class="audit-trail-box">No intervention triggers logged yet.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== Panel 06: System Specs ==================== -->
+      <section class="panel-section" data-panel="about">
+        <div class="section-sys-header">
+          <div class="sys-label-tag">[ 06 // SYSTEM SPECIFICATIONS &amp; ARCHITECTURE ]</div>
+          <h1 class="section-title">About BotPet System</h1>
+          <p class="section-desc">Next-generation desktop companion and focus vigilance system engineered with precision vector animation physics.</p>
+        </div>
+
+        <div class="poster-shell hover-red-line">
+          <div class="corner-bracket bracket-tl"></div>
+          <div class="corner-bracket bracket-tr"></div>
+          <div class="corner-bracket bracket-bl"></div>
+          <div class="corner-bracket bracket-br"></div>
+          <div class="poster-inner">
+            <div class="card-title-mono">Engine &amp; Runtime Specifications</div>
+            <div class="telemetry-grid">
+              <div class="telemetry-kv-box">
+                <span class="telemetry-key">BOTPET VERSION</span>
+                <span class="telemetry-val">1.0.0 (Auden FX Edition)</span>
+              </div>
+              <div class="telemetry-kv-box">
+                <span class="telemetry-key">SYSTEM STATUS</span>
+                <span class="telemetry-val text-accent">Active &amp; Guarding</span>
+              </div>
+              <div class="telemetry-kv-box">
+                <span class="telemetry-key">VECTOR RIGS</span>
+                <span class="telemetry-val">Classic Cat, Chibi Panda, Playful Puppy</span>
+              </div>
+              <div class="telemetry-kv-box">
+                <span class="telemetry-key">GRAPHICS STACK</span>
+                <span class="telemetry-val">GSAP + Three.js r128 (Mix-Blend-Screen)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="../desktop/vendor/three.min.js"></script>
+<script src="../desktop/vendor/gsap.min.js"></script>
+<script src="../desktop/vendor/MorphSVGPlugin.min.js"></script>
+<script src="../js/cat-rig.js"></script>
+<script src="../js/cat-shapes.js"></script>
+<script src="../js/cat.js"></script>
+<script src="../js/character-manager.js"></script>
+<script src="../js/panda-rig.js"></script>
+<script src="settings.js"></script>
+</body>
+</html>
